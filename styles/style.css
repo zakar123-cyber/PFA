@@ -1,0 +1,263 @@
+/* styles/style.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    line-height: 1.6;
+}
+
+header {
+    background-color: #222; /* Darker shade of black for header */
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo span {
+    color: #ff0000; /* Red logo text */
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li a {
+    color: #fff; /* White navigation links */
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #ff0000; /* Red hover for navigation links */
+}
+
+.nav-icons li {
+    margin-left: 1rem;
+}
+
+.nav-icons li a {
+    display: inline-block;
+    color: #fff; /* White navigation icons */
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-icons li a:hover {
+    color: #ff0000; /* Red hover for navigation icons */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.booking-section {
+    background-color: #111; /* Darker shade of black for booking section */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+}
+
+.tabs {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    border-bottom: 1px solid #444; /* Dark gray border */
+    margin-bottom: 1.5rem;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    color: #fff; /* White tab buttons */
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    text-align: center; /* Center text inside the button */
+}
+
+.tabs button:hover {
+    color: #ff0000; /* Red hover for tab buttons */
+}
+
+.tabs .active-tab {
+    color: #ff0000; /* Red active tab */
+    border-bottom: 2px solid #ff0000;
+}
+
+.tab-content {
+    padding: 1.5rem 0;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #fff; /* White label text */
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="time"] {
+    width: calc(100% - 20px);
+    padding: 0.8rem;
+    border: 1px solid #555; /* Dark gray border for inputs */
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #fff; /* White input text */
+    background-color: #333; /* Dark background for inputs */
+}
+.form-group input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 0.8rem;
+    border: 1px solid #555; /* Dark gray border for inputs */
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #fff; /* White input text */
+    background-color: #333; /* Dark background for inputs */
+}
+.form-group input[type="date"] {
+    color: #fff; /* White date text */
+}
+
+.comfort-options {
+    display: flex;
+    flex-wrap: wrap; /* Allows labels to wrap on smaller screens */
+    gap: 0.75rem; /* Adjust gap for spacing */
+    margin-top: 0.5rem;
+}
+
+.comfort-options label {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem; /* Add some spacing between labels */
+    color: #fff; /* White comfort option labels */
+}
+
+.comfort-options input[type="radio"] {
+    margin-right: 0.3rem;
+}
+
+.search-button {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.search-button button[type="submit"] {
+    background-color: #ff0000; /* Red submit button */
+    color: #fff; /* White submit button text */
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button button[type="submit"]:hover {
+    background-color: #cc0000; /* Darker red hover for submit button */
+}
+
+/* Style for train results */
+.train-results ul {
+    list-style: none;
+    padding: 0;
+}
+
+.train-results li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222; /* Match the website's style */
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Style for the "Book" button */
+.book-button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+    background-color: #ff9900; /* Slightly darker orange on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links li {
+        margin: 0.5rem 0;
+    }
+
+    .nav-links li a {
+        margin-left: 0;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"] {
+        width: calc(100% - 10px);
+    }
+
+    .comfort-options {
+        flex-direction: column; /* Stack labels vertically on smaller screens */
+        align-items: flex-start;
+    }
+
+    .comfort-options label {
+        margin-right: 0; /* Remove right margin when stacked */
+    }
+}

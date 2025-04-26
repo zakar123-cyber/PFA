@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=de, initial-scale=1.0">
+    <title>Train Website</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input, .modal-content select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            color: #000;
+        }
+
+        .modal-content button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #cc0000;
+        }
+
+        .close-modal {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .close-modal:hover {
+            background-color: #333;
+        }
+
+        .modal-content .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .modal-content .form-row input {
+            flex: 1;
+        }
+
+        /* Train results styling */
+        .train {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #333; /* Dark grey background */
+            color: white; /* White text color */
+        }
+
+        .train p {
+            margin: 0;
+            padding: 0 10px;
+            flex: 1;
+            text-align: left;
+            color: white; /* Ensure text is white */
+        }
+
+        .train button {
+            background-color: #ff0000; /* Same color as "Flashway" text */
+            color: black; /* Black text color */
+            border: 1px solid black; /* Black border */
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .train button:hover {
+            background-color: #cc0000; /* Slightly darker red on hover */
+            color: white; /* White text on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo"><span>FLASHWAY</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="http://localhost:3000/">Espace Entreprise</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking-section">
+            <form id="searchTrainsForm">
+                <div class="form-group">
+                    <label for="garedepart">Gare de départ</label>
+                    <input type="text" id="garedepart" placeholder="Ma gare de départ" required>
+                </div>
+                <div class="form-group">
+                    <label for="garearrivee">Gare d'arrivée</label>
+                    <input type="text" id="garearrivee" placeholder="Ma gare d'arrivée" required>
+                </div>
+                <div class="form-group">
+                    <label for="datedep">Date de départ</label>
+                    <input type="date" id="datedep" value="2025-04-07" required>
+                </div>
+                <div class="form-group search-button">
+                    <button type="submit">Chercher</button>
+                </div>
+            </form>
+            <div id="trainResults" class="train-results"></div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <h3>Paiment</h3>
+            <input type="text" id="nom" placeholder="Nom" required>
+            <input type="text" id="prenom" placeholder="Prénom" required>
+            <input type="text" id="creditCard" placeholder="Numéro de carte" required>
+            <div class="form-row">
+                <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" required>
+                <input type="text" id="expiryYear" placeholder="YY" maxlength="2" required>
+            </div>
+            <div>
+                <p id="prix_voyage">price:</p>
+            </div>
+            <select id="paymentMethod" required>
+                <option value="" disabled selected>Choisissez un mode de paiement</option>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="PayPal">PayPal</option>
+            </select>
+            <button id="purchaseButton">Payer</button>
+            <button class="close-modal" id="closeModal">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchTrainsForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const gareDepart = document.getElementById('garedepart').value.trim();
+            const gareArrivee = document.getElementById('garearrivee').value.trim();
+            const dateDep = document.getElementById('datedep').value.trim();
+
+            console.log('Search Input:', { gareDepart, gareArrivee, dateDep }); // Log the input data
+
+            try {
+                const response = await fetch('http://localhost:3000/api/trains', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ gareDepart, gareArrivee, dateDep })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Error Response:', errorData);
+                    alert(errorData.message || 'Failed to fetch trains.');
+                    return;
+                }
+
+                const trains = await response.json();
+                console.log('Trains Received:', trains); // Log the received data
+
+                const trainResults = document.getElementById('trainResults');
+                trainResults.innerHTML = '';
+
+                trains.forEach(train => {
+                    const trainDiv = document.createElement('div');
+                    trainDiv.classList.add('train');
+                    trainDiv.innerHTML = `
+                        <p><strong>Train:</strong> ${train.name}</p>
+                        <p><strong>Départ:</strong> ${train.departure_station} à ${train.departure_time}</p>
+                        <p><strong>Arrivée:</strong> ${train.arrival_station} à ${train.arrival_time}</p>
+                        <button class="book-train" data-train-id="${train._id}">Réserver</button>
+                    `;
+                    trainResults.appendChild(trainDiv);
+                });
+
+                // New helper function to fetch and display the train price
+                function fetchTrainPrice(trainId) {
+                    fetch(`http://localhost:3000/api/getTrainPrice/${trainId}`)
+                        .then(response => {
+                            console.log("Response from getTrainPrice endpoint:", response);
+                            if (!response.ok) { 
+                                throw new Error("Failed to fetch train price"); 
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log("Data received:", data);
+                            if(data && data.price) {
+                                document.getElementById('prix_voyage').textContent = `Price: ${data.price} €`; // fixed reference
+                            }
+                            else {
+                                document.getElementById('prix_voyage').textContent = 'Price: Not available';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching train price:', error);
+                            document.getElementById('prix_voyage').textContent = 'Price: Not available';
+                        });
+                }
+
+                // When the modal gains focus, re-fetch the price (if trainId is available)
+                document.getElementById('bookingModal').addEventListener('focusin', function () {
+                    const trainId = document.getElementById('purchaseButton').getAttribute('data-train-id');
+                    if (trainId) {
+                        fetchTrainPrice(trainId);
+                    }
+                });
+
+                // Update book-train button event
+                document.querySelectorAll('.book-train').forEach(button => {
+                    button.addEventListener('click', async function () {
+                        const trainId = this.getAttribute('data-train-id');
+                        document.getElementById('bookingModal').style.display = 'flex';
+                        document.getElementById('purchaseButton').setAttribute('data-train-id', trainId);
+                        fetchTrainPrice(trainId);
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error fetching trains:', error);
+                alert('An error occurred while fetching trains.');
+            }
+        });
+
+        document.getElementById('purchaseButton').addEventListener('click', async function () {
+            const nom = document.getElementById('nom').value;
+            const prenom = document.getElementById('prenom').value;
+            const creditCard = document.getElementById('creditCard').value;
+            const expiryMonth = document.getElementById('expiryMonth').value;
+            const expiryYear = document.getElementById('expiryYear').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const trainId = this.getAttribute('data-train-id');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/saveClientInfo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nom, prenom, creditCard, expiryMonth, expiryYear, paymentMethod, trainId })
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message);
+                    document.getElementById('bookingModal').style.display = 'none';
+                } else {
+                    alert('Erreur: ' + result.errors.map(err => err.msg).join(', '));
+                }
+            } catch (error) {
+                console.error('Error saving client information:', error);
+            }
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('bookingModal').style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
