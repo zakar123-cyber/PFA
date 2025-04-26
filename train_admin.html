@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Admin</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: white; /* White text */
+        }
+
+        header {
+            background-color: #333; /* Dark grey background */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff0000; /* Red text for "Flashway" */
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            margin-left: 20px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 40px 0; /* Increased margin for spacing */
+            color: white;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #222; /* Dark grey background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            border: 1px solid #444; /* Darker border */
+            padding: 10px;
+            text-align: center;
+            color: white; /* White text */
+        }
+
+        table th {
+            background-color: #ff0000; /* Red background for table header */
+            color: white; /* White text */
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #444; /* Slightly lighter grey for even rows */
+        }
+
+        table tr:hover {
+            background-color: #555; /* Highlight row on hover */
+        }
+
+        table td {
+            background-color: #333; /* Dark grey for table cells */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Train Admin Panel</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+            <span style="font-size: 24px; font-weight: bold; color: #ff0000;">Flashway</span>
+            <a href="http://localhost:3001/base/index.html" style="text-decoration: none; background-color: #333; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold;">Go to Home</a>
+        </div>
+    </header>
+
+    <h1> Admin Page</h1>
+
+    <!-- Table to display client information -->
+    <table id="clientinfo-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Carte de Crédit</th>
+                <th>Mois d'Expiration</th>
+                <th>Année d'Expiration</th>
+                <th>Méthode de Paiement</th>
+                <th>ID Train</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="7">Loading client information...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchClientInfo() {
+            try {
+                const response = await fetch('/api/clientinfos'); // Fetch client data from the server
+                const data = await response.json();
+
+                const tableBody = document.getElementById('clientinfo-table').querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="7">No client information available</td></tr>';
+                    return;
+                }
+
+                data.forEach(client => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${client.nom}</td>
+                        <td>${client.prenom}</td>
+                        <td>${client.creditCard}</td>
+                        <td>${client.expiryMonth}</td>
+                        <td>${client.expiryYear}</td>
+                        <td>${client.paymentMethod}</td>
+                        <td>${client.trainId}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching client info:', error);
+            }
+        }
+
+        // Automatically redirect to localhost after 5 seconds
+        setTimeout(() => {
+            window.location.href = 'http://localhost:3000';
+        }, 5000);
+
+        // Fetch client info on page load
+        window.onload = fetchClientInfo;
+    </script>
+</body>
+</html>
