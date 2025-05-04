@@ -79,6 +79,65 @@
         table td {
             background-color: #333; /* Dark grey for table cells */
         }
+        /* Mobile styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    header > div {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header span,
+    header a {
+        color: #ff0000 !important; /* Red color */
+        font-size: 18px;
+    }
+
+    header a {
+        background-color: transparent;
+        padding: 8px 16px;
+        border: 2px solid #ff0000;
+        border-radius: 8px;
+    }
+}
+/* Make table scrollable on small screens */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table th,
+    table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    table thead tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    table tbody {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+}
+
+ 
     </style>
 </head>
 <body>

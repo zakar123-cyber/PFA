@@ -50,21 +50,11 @@ const trainSchema = new mongoose.Schema({
 const Train = mongoose.model('Train', trainSchema);
 
 // API endpoint to save client info
-app.post('/api/saveClientInfo', [
-    body('nom').notEmpty().withMessage('Nom is required'),
-    body('prenom').notEmpty().withMessage('Prénom is required'),
-    body('creditCard').isLength({ min: 16, max: 16 }).withMessage('Credit card must be exactly 16 digits'),
-    body('expiryMonth').isLength({ min: 2, max: 2 }).withMessage('Expiry month must be 2 digits'),
-    body('expiryYear').isLength({ min: 2, max: 2 }).withMessage('Expiry year must be 2 digits'),
-    body('paymentMethod').isIn(['Visa', 'Mastercard', 'PayPal']).withMessage('Invalid payment method'),
-    body('trainId').notEmpty().withMessage('Train ID is required')
-], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
+app.post('/api/saveClientInfo', async (req, res) => {
     const { nom, prenom, creditCard, expiryMonth, expiryYear, paymentMethod, trainId } = req.body;
+
+    // Generate a random seat number
+    const seatNumber = `S-${Math.floor(Math.random() * 100) + 1}`; // Example: S-45
 
     try {
         const clientInfo = new ClientInfo({
@@ -74,11 +64,15 @@ app.post('/api/saveClientInfo', [
             expiryMonth,
             expiryYear,
             paymentMethod,
-            trainId
+            trainId,
+            seatNumber // Save the generated seat number
         });
 
         await clientInfo.save(); // Save to database
-        res.status(201).json({ message: 'Client information saved successfully!' });
+        res.status(201).json({ 
+            message: 'Client information saved successfully!', 
+            seatNumber // Include the seat number in the response
+        });
     } catch (error) {
         res.status(500).json({ message: 'Failed to save client information.' });
     }

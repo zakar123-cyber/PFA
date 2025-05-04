@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ticket-container {
+            width: 80%;
+            max-width: 900px;
+            margin: 120px auto 20px auto;
+            background-color: #333;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            color: white;
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 20px;
+        }
+
+        .ticket-header h1 {
+            font-size: 30px;
+            margin: 0;
+            color: #ff0000;
+        }
+
+        .ticket-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .ticket-details div {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .ticket-details div span {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .qr-code-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo"><span>FLASHWAY</span></div>
+    </div>
+</header>
+
+<div class="ticket-container">
+    <div class="ticket-header">
+        <h1>Train Ticket</h1>
+        <span style="font-size: 20px; color: #ff0000;">Flashway</span>
+    </div>
+
+    <div class="ticket-details">
+        <div>
+            <span>Name:</span> <span>Ahmed</span>
+        </div>
+        <div>
+            <span>Prénom:</span> <span>Basha</span>
+        </div>
+        <div>
+            <span>Train ID:</span> <span>680a1a3a51b5ef162ff94b7a</span>
+        </div>
+        <div>
+            <span>Payment Method:</span> <span>Mastercard</span>
+        </div>
+        <div>
+            <span>Seat Number:</span> <span>S-37</span>
+        </div>
+    </div>
+
+    <div class="qr-code-wrapper">
+        <p>Scan QR Code for more details</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://611f-105-72-174-113.ngrok-free.app/testticket?name=Ahmed&prenom=Basha&trainId=680a1a3a51b5ef162ff94b7a&paymentMethod=Mastercard&seatNumber=S-37" alt="QR Code">
+    </div>
+</div>
+
+</body>
+</html>
