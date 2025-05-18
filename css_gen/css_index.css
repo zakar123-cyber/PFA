@@ -1,0 +1,29 @@
+
+        /* Optional: Add smooth scrolling to the whole page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Adjusting button link color */
+        .buttoncol a {
+            color: white; /* Or any color you want */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .buttoncol a:hover {
+            color: yellow; /* Change color on hover if desired */
+        }
+
+        @media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+    
+#imagelogo{
+
+position: relative;
+
+}

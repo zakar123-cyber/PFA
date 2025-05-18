@@ -1,0 +1,254 @@
+
+        /* Header styling remains the same */
+
+        .booking_ocline {
+            padding-top: 10px;
+            margin-top: 10px;
+            padding-bottom: 0px; /* Set padding-bottom to 0 */
+            margin-bottom: 10px; /* Add margin-bottom to control space below */
+            display: flex;
+            justify-content: center;
+        }
+
+        #searchTrainsForm {
+            width: 80%;
+            max-width: 600px;
+        }
+
+        #searchTrainsForm .titlepage {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        #searchTrainsForm h2 {
+            font-size: 2rem;
+            margin-bottom: 0px;
+        }
+
+        #searchTrainsForm input[type="date"] {
+            margin-bottom: 1px;
+        }
+
+        #searchTrainsForm button[type="submit"] {
+            margin-top: 10px;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            border: none; /* Remove default border */
+            padding: 10px 25px; /* Adjust padding as needed */
+            border-radius: 50px; /* Make edges very rounded */
+            cursor: pointer; /* Add a pointer on hover */
+            font-size: 1rem; /* Match other button font size */
+            transition: background-color 0.2s ease; /* Smooth hover transition */
+        }
+
+        #searchTrainsForm button[type="submit"]:hover {
+            background-color: #333; /* Slightly darker on hover */
+        }
+
+        #trainResults {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+        }
+
+        .train {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .train p {
+            margin-bottom: 6px;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        .train strong {
+            font-weight: 500;
+            color: #212529;
+        }
+
+        .train button {
+            margin-top: 10px;
+            width: auto;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: 0.25rem; /* Keep the default rounded for now, we'll override */
+        }
+
+        .train .book-train {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            border: none; /* Remove default border */
+            padding: 10px 25px; /* Adjust padding to match */
+            border-radius: 50px; /* Make edges very rounded */
+            cursor: pointer; /* Add a pointer on hover */
+            font-size: 1rem; /* Match other button font size */
+            transition: background-color 0.2s ease; /* Smooth hover transition */
+        }
+
+        .train .book-train:hover {
+            background-color: #333; /* Slightly darker on hover */
+        }
+
+        /* Modal styling remains largely the same, adjust if needed */
+        #bookingModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 0.25rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
+
+        .modal-header h3 {
+            margin-bottom: 0;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+            border-bottom-right-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            margin-bottom: 1rem;
+        }
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -5px;
+            margin-left: -5px;
+        }
+
+        .form-row > .form-control {
+            width: auto;
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .close-modal {
+            margin-left: 10px;
+        }
+
+        #clientinfo-table-container {
+            display: flex;
+            justify-content: center; /* Centers the content horizontally */
+            width: 100%;
+            margin-top: 10px; /* Set the top margin for the table container */
+            margin-bottom: 20px; /* Adjust spacing below the table */
+        }
+        #h2{
+            position: relative;
+            margin-bottom: 0px;
+        }
+        #clientinfo-table {
+            border-collapse: collapse;
+            width: auto;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border-radius: 0.25rem;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        #clientinfo-table thead th {
+            background-color: #000; /* Black header */
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 12px;
+        }
+
+        #clientinfo-table td,
+        #clientinfo-table th {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        #clientinfo-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Responsive Tweaks */
+
+    
+        /* Optional: Add smooth scrolling to the whole page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Adjusting button link color */
+        .buttoncol a {
+            color: white; /* Or any color you want */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .buttoncol a:hover {
+            color: yellow; /* Change color on hover if desired */
+        }
+
+        @media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+    
