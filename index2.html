@@ -1,387 +1,251 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train Website</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <title>FLASHWAY BOOKING</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="images/WhatsApp Image 2025-05-16 at 08.30.49_ba11a200.jpg" type="image/gif" />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="css_gen/css_index2.css">
     
-        .modal-content {
-            background-color: #000;
-            color: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            border: 2px solid #ff0000;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-        }
-    
-        .modal-content h3 {
-            color: #ff0000;
-            font-size: 22px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 4px #ff0000;
-        }
-    
-        .modal-content input,
-        .modal-content select {
-            width: calc(100% - 20px);
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ff0000;
-            border-radius: 6px;
-            background-color: #111;
-            color: #fff;
-            font-size: 15px;
-            outline: none;
-        }
-    
-        .modal-content button {
-            background-color: #ff0000;
-            color: #fff;
-            border: 2px solid #fff;
-            padding: 12px 25px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.2s ease;
-        }
-    
-        .modal-content button:hover {
-            background-color: #cc0000;
-            border-color: #fff;
-        }
-    
-        .close-modal {
-            background-color: #000;
-            color: #fff;
-            border: 1px solid #ff0000;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-    
-        .close-modal:hover {
-            background-color: #ff0000;
-            color: #000;
-        }
-    
-        .modal-content .form-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-        }
-    
-        .modal-content .form-row input {
-            flex: 1;
-        }
-    
-        /* Train results styling */
-        .train {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px;
-            border: 1px solid #ff0000;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            background-color: #111;
-            color: #fff;
-        }
-    
-        .train p {
-            margin: 0;
-            padding: 0 10px;
-            flex: 1;
-            text-align: left;
-        }
-    
-        .train button {
-            background-color: #ff0000;
-            color: #fff;
-            border: 2px solid #fff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-        }
-    
-        .train button:hover {
-            background-color: #cc0000;
-            color: #000;
-            border-color: #fff;
-        }
-        /* Responsive styles */
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 20px 15px;
-        width: 95%;
-    }
 
-    .modal-content h3 {
-        font-size: 18px;
-    }
-
-    .modal-content input,
-    .modal-content select {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .modal-content button {
-        padding: 10px 18px;
-        font-size: 14px;
-    }
-
-    .train {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .train p {
-        text-align: left;
-        padding: 0;
-    }
-
-    .train button {
-        width: 100%;
-        text-align: center;
-    }
-
-    .modal-content .form-row {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .header-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-links li {
-        margin: 5px 0;
-    }
-}
-
-@media (min-width: 769px) {
-    .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 20px;
-    }
-
-    .nav-links li {
-        list-style: none;
-    }
-}
-/* Mobile styles */
-@media (max-width: 768px) {
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 0;
-    }
-
-    .nav-links li a {
-        color: #ff0000 !important;
-        font-weight: bold;
-        text-decoration: none;
-        font-size: 18px;
-    }
-}
-
-
-    </style>
-    
-    
 </head>
-<body>
+<body class="main-layout">
+    <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+    </div>
+
     <header>
-        <div class="header-container">
-            <div class="logo"><span>FLASHWAY</span></div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="http://localhost:3000/">Espace Entreprise</a></li>
-                </ul>
-            </nav>
-            
+        <div class="header">
+            <img src="images/WhatsApp Image 2025-05-16 at 08.30.49_ba11a200.jpg" alt="logoimage"style="width: 81px;" class="imagelogo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                        <div class="full">
+                            <div class="center-desk">
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarsExample04">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://localhost:3000/base/index.html">Home</a>  </li>
+                                   
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section class="booking-section">
-            <form id="searchTrainsForm">
-                <div class="form-group">
-                    <label for="garedepart">Gare de départ</label>
-                    <input type="text" id="garedepart" placeholder="Ma gare de départ" required>
-                </div>
-                <div class="form-group">
-                    <label for="garearrivee">Gare d'arrivée</label>
-                    <input type="text" id="garearrivee" placeholder="Ma gare d'arrivée" required>
-                </div>
-                <div class="form-group">
-                    <label for="datedep">Date de départ</label>
-                    <input type="date" id="datedep" value="2025-04-07" required>
-                </div>
-                <div class="form-group search-button">
-                    <button type="submit">Chercher</button>
+    <div class="booking_ocline" id="booking-section">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+            <form id="searchTrainsForm" class="book_now w-50">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                        <div class="titlepage">
+                            <h2>Station de départ</h2>
+                        </div>
+                        <input type="text" id="departureStation" class="form-control" placeholder="Entrez la gare de départ" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="titlepage">
+                            <h2>Station d'arrivée</h2>
+                        </div>
+                        <input type="text" id="arrivalStation" class="form-control" placeholder="Entrez la gare d'arrivée" required>
+                    </div>
+                    <div class="col-md-6 text-center mb-3">
+                        <div class="titlepage">
+                            <h2>Date de départ</h2>
+                        </div>
+                        <input type="date" id="datedep" class="form-control" value="2025-05-22" required>
+                    </div>
+                    <div class="col-md-12 text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Chercher</button>
+                    </div>
                 </div>
             </form>
-            <div id="trainResults" class="train-results"></div>
-        </section>
-    </main>
-
-    <!-- Modal -->
+        </div>
+    </div>
+    <div class="train-results container my-5" id="trainResults"></div>
+    <!-- Notification area -->
+    <div id="notification" style="display:none;position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;min-width:220px;max-width:90vw;background:#e84c3d;color:#fff;padding:14px 24px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:1rem;text-align:center;"></div>
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <h3>Paiment</h3>
-            <input type="text" id="nom" placeholder="Nom" required>
-            <input type="text" id="prenom" placeholder="Prénom" required>
-            <input type="text" id="creditCard" placeholder="Numéro de carte" required>
-            <div class="form-row">
-                <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" required>
-                <input type="text" id="expiryYear" placeholder="YY" maxlength="2" required>
+            <input type="text" id="nom" class="form-control mb-2" placeholder="Nom" required>
+            <input type="text" id="prenom" class="form-control mb-2" placeholder="Prénom" required>
+            <input type="text" id="creditCard" class="form-control mb-2" placeholder="Numéro de carte" required>
+            <div class="form-row" style="display: flex; gap: 10px;">
+                <input type="text" id="expiryMonth" class="form-control mb-2" placeholder="MM" maxlength="2" required style="flex:1;">
+                <input type="text" id="expiryYear" class="form-control mb-2" placeholder="YY" maxlength="2" required style="flex:1;">
             </div>
             <div>
                 <p id="prix_voyage">price:</p>
             </div>
-            <select id="paymentMethod" required>
+            <select id="paymentMethod" class="form-control mb-2" required style=" padding-left: 60px; padding-top: 7px; padding-bottom: 1px;">
                 <option value="" disabled selected>Choisissez un mode de paiement</option>
                 <option value="Visa">Visa</option>
                 <option value="Mastercard">Mastercard</option>
                 <option value="PayPal">PayPal</option>
             </select>
-            <button id="purchaseButton">Payer</button>
-            <button class="close-modal" id="closeModal">Fermer</button>
+            <button id="purchaseButton" class="btn btn-danger">Payer</button>
+            <button class="close-modal btn btn-secondary mt-2" id="closeModal">Fermer</button>
         </div>
     </div>
+    </div>
 
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Contact US</h3>
+                        <ul class="conta">
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> flashway@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Menu Link</h3>
+                        <ul class="link_menu">
+                            <li><a href="http://localhost:3000/base/index.html">Home</a></li>
+                            <li><a href="#booking-section">Book Now</a></li>
+                            <li><a href="#contact-us">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Newsletter</h3>
+                        <form class="bottom_form">
+                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                            <button class="sub_btn">Subscribe</button>
+                        </form>
+                        <ul class="social_icon">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script>
+        //objets pour stocker les détails du train sélectionné
+        let selectedTrainDetails = {};
+
+        // Show notification helper 
+        function showNotification(msg, timeout = 3500) {
+            const notif = document.getElementById('notification');
+            notif.textContent = msg;
+            notif.style.display = 'block';
+            setTimeout(() => { notif.style.display = 'none'; }, timeout);
+        }
+        // Handle form submission
         document.getElementById('searchTrainsForm').addEventListener('submit', async function (e) {
+           // Prevent page form submission from refreshing the page and losing data
             e.preventDefault();
-            const gareDepart = document.getElementById('garedepart').value.trim();
-            const gareArrivee = document.getElementById('garearrivee').value.trim();
+            // Get form values
             const dateDep = document.getElementById('datedep').value.trim();
-
-            console.log('Search Input:', { gareDepart, gareArrivee, dateDep }); // Log the input data
-
+            const departureStation = document.getElementById('departureStation').value.trim();
+            const arrivalStation = document.getElementById('arrivalStation').value.trim();
+            // Validate form values
             try {
+                // Check if any field is empty
                 const response = await fetch('http://localhost:3000/api/trains', {
                     method: 'POST',
+                    //it defines the type of data that is being sent to the server
+                    //in this case, it is JSON
+                    //it tells the server that the data being sent is in JSON format
+                    //and parse it accordingly
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ gareDepart, gareArrivee, dateDep })
+                    //transform the data to JSON and save it in the body
+                    //and send it to the server
+                    body: JSON.stringify({ dateDep, departureStation, arrivalStation })
                 });
-
+                // Check if the response is ok (status code 200-299)
+                //if the response is not ok, it means that there was an error message that contains "failed to fetch trains"
                 if (!response.ok) {
                     const errorData = await response.json();
-                    console.error('Error Response:', errorData);
-                    alert(errorData.message || 'Failed to fetch trains.');
-                    return;
+                    // Show error message using the showNotification function
+                    //it will display the error message for 3.5 seconds
+                    showNotification(errorData.message || 'Failed to fetch trains.');
+                    return; // Exit the function if the response is not ok
                 }
-
+                // Parse the response data
+                //it will convert the response data to JSON format
                 const trains = await response.json();
-                console.log('Trains Received:', trains); // Log the received data
-
+                // Check if there are no trains found based on the search criteria
+                //if there are no trains found, it will display a message saying "No trains found"
                 const trainResults = document.getElementById('trainResults');
-                trainResults.innerHTML = '';
+                trainResults.innerHTML = ''; // Clear previous results
 
+                // Check if there are no trains found
                 trains.forEach(train => {
                     const trainDiv = document.createElement('div');
-                    trainDiv.classList.add('train');
+                    trainDiv.classList.add('train'); // Add a class CSS for styling to the train div
+                    // Add train details to the div
+                    //it will display the train details in the div
                     trainDiv.innerHTML = `
                         <p><strong>Train:</strong> ${train.name}</p>
                         <p><strong>Départ:</strong> ${train.departure_station} à ${train.departure_time}</p>
                         <p><strong>Arrivée:</strong> ${train.arrival_station} à ${train.arrival_time}</p>
-                        <button class="book-train" data-train-id="${train._id}">Réserver</button>
+                        <p><strong>Prix:</strong> ${train.price} DH</p>
+                        // button reservation strore the train details in the selectedTrainDetails object
+                        <button class="book-train btn btn-success"
+                            data-train-id="${train._id}"
+                            data-price="${train.price}"
+                            data-train-name="${train.name}"
+                            data-departure-station="${train.departure_station}"
+                            data-arrival-station="${train.arrival_station}"
+                            data-departure-date="${document.getElementById('datedep').value}">
+                            Réserver
+                        </button>
                     `;
+                    // append the trainDiv to add the train details to the trainResults div
                     trainResults.appendChild(trainDiv);
                 });
-
-                // New helper function to fetch and display the train price
-                function fetchTrainPrice(trainId) {
-                    fetch(`http://localhost:3000/api/getTrainPrice/${trainId}`)
-                        .then(response => {
-                            console.log("Response from getTrainPrice endpoint:", response);
-                            if (!response.ok) { 
-                                throw new Error("Failed to fetch train price"); 
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log("Data received:", data);
-                            if(data && data.price) {
-                                document.getElementById('prix_voyage').textContent = `Price: ${data.price} €`; // fixed reference
-                            }
-                            else {
-                                document.getElementById('prix_voyage').textContent = 'Price: Not available';
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching train price:', error);
-                            document.getElementById('prix_voyage').textContent = 'Price: Not available';
-                        });
-                }
-
-                // When the modal gains focus, re-fetch the price (if trainId is available)
-                document.getElementById('bookingModal').addEventListener('focusin', function () {
-                    const trainId = document.getElementById('purchaseButton').getAttribute('data-train-id');
-                    if (trainId) {
-                        fetchTrainPrice(trainId);
-                    }
-                });
-
-                // Update book-train button event
+        
+                // Attach click handler to each "Réserver" button 
+                // select all the buttons with the class "book-train" and add an event listener to each button
+                //when the button is clicked, it will store the train details in the selectedTrainDetails object
                 document.querySelectorAll('.book-train').forEach(button => {
-                    button.addEventListener('click', async function () {
-                        const trainId = this.getAttribute('data-train-id');
-                        document.getElementById('bookingModal').style.display = 'flex';
+                    button.addEventListener('click', function () {
+                        // Store train details in the selectedTrainDetails object
+                        selectedTrainDetails = {
+                            //get the data attributes from the button
+                            trainName: this.getAttribute('data-train-name'),
+                            departureStation: this.getAttribute('data-departure-station'),
+                            arrivalStation: this.getAttribute('data-arrival-station'),
+                            departureDate: this.getAttribute('data-departure-date')
+                        };
+                        // Show booking modal with train details
+                        const trainId = this.getAttribute('data-train-id');// get the train id from the button
+                        const prix = this.getAttribute('data-price');
+                        document.getElementById('bookingModal').style.display = 'block';// show the booking modal
+                        // Set the train ID in the purchase button and display the price
                         document.getElementById('purchaseButton').setAttribute('data-train-id', trainId);
-                        fetchTrainPrice(trainId);
+                        document.getElementById('prix_voyage').innerText = `Price: ${prix} DH`;// display the price from the button
                     });
                 });
-
+        
             } catch (error) {
-                console.error('Error fetching trains:', error);
-                alert('An error occurred while fetching trains.');
+                showNotification('An error occurred while fetching trains.');
             }
         });
-
+        
         document.getElementById('purchaseButton').addEventListener('click', async function () {
             const nom = document.getElementById('nom').value;
             const prenom = document.getElementById('prenom').value;
@@ -390,37 +254,55 @@
             const expiryYear = document.getElementById('expiryYear').value;
             const paymentMethod = document.getElementById('paymentMethod').value;
             const trainId = this.getAttribute('data-train-id');
-
+        
             try {
+                //function to save client info
                 const response = await fetch('http://localhost:3000/api/saveClientInfo', {
-                    method: 'POST',
+                    method: 'POST',//it will send the data to the server
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nom, prenom, creditCard, expiryMonth, expiryYear, paymentMethod, trainId })
+                    body: JSON.stringify({ nom, prenom, creditCard, expiryMonth, expiryYear, paymentMethod, trainId })//transform the data to JSON and save it in the body
                 });
-
-                const result = await response.json();
+        
+                const result = await response.json();// parse the response data type to JSON
                 if (response.ok) {
-                    // Redirect to the ticket page with booking info as query parameters
                     const queryParams = new URLSearchParams({
                         nom,
                         prenom,
                         trainId,
                         paymentMethod,
-                        seatNumber: result.seatNumber // Use the generated seat number from the backend
-                    }).toString();
+                        seatNumber: result.seatNumber,
+                        trainName: selectedTrainDetails.trainName,
+                        departureStation: selectedTrainDetails.departureStation,
+                        arrivalStation: selectedTrainDetails.arrivalStation,
+                        departureDate: selectedTrainDetails.departureDate
+                    }).toString();// convert the object to a query string
+                    // Redirect to ticket.html with query parameters and display the ticket with the train and client details
                     window.location.href = `ticket.html?${queryParams}`;
                 } else {
-                    alert('Erreur: ' + result.errors.map(err => err.msg).join(', '));
+                    showNotification(result.message || 'Erreur lors du paiement.');
                 }
+        
             } catch (error) {
-                console.error('Error saving client information:', error);
+                //when error type is not ok
+                //it will display the error message in the console that contains "Error saving client info"
+                console.error('Error saving client info:', error);
+                showNotification('Erreur lors de l’envoi des informations de paiement.');
             }
         });
-
+        
+        // Close modal
         document.getElementById('closeModal').addEventListener('click', function () {
-            document.getElementById('bookingModal').style.display = 'none';
+            document.getElementById('bookingModal').style.display = 'none';// hide the modal
         });
-
     </script>
+    
+    
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    
 </body>
 </html>

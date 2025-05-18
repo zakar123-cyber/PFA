@@ -1,200 +1,398 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train Admin</title>
+    <title>FLASHWAY ADMIN</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="images/WhatsApp Image 2025-05-16 at 08.30.49_ba11a200.jpg" type="image/gif" />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+
+    
+     <link rel="stylesheet" href="css_gen/css_train_admin.css">
+
+    <!-- Add to <head> or your CSS file -->
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000; /* Black background */
-            color: white; /* White text */
+        body.admin-blur > *:not(#admin-password-overlay) {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
         }
-
-        header {
-            background-color: #333; /* Dark grey background */
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: bold;
-            color: #ff0000; /* Red text for "Flashway" */
-        }
-
-        header a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-            margin-left: 20px;
-        }
-
-        header a:hover {
-            text-decoration: underline;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 40px 0; /* Increased margin for spacing */
-            color: white;
-        }
-
-        table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #222; /* Dark grey background */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        table th, table td {
-            border: 1px solid #444; /* Darker border */
-            padding: 10px;
-            text-align: center;
-            color: white; /* White text */
-        }
-
-        table th {
-            background-color: #ff0000; /* Red background for table header */
-            color: white; /* White text */
-            font-weight: bold;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #444; /* Slightly lighter grey for even rows */
-        }
-
-        table tr:hover {
-            background-color: #555; /* Highlight row on hover */
-        }
-
-        table td {
-            background-color: #333; /* Dark grey for table cells */
-        }
-        /* Mobile styles */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    header h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    header > div {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    header span,
-    header a {
-        color: #ff0000 !important; /* Red color */
-        font-size: 18px;
-    }
-
-    header a {
-        background-color: transparent;
-        padding: 8px 16px;
-        border: 2px solid #ff0000;
-        border-radius: 8px;
-    }
-}
-/* Make table scrollable on small screens */
-@media (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    table th,
-    table td {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    table thead tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-    }
-
-    table tbody {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-    }
-}
-
- 
     </style>
+    <style>
+        /* Enhanced statistics card styles */
+        .stat-box {
+            background: linear-gradient(135deg, #fff 60%, #f8f9fa 100%);
+            border-radius: 16px;
+            padding: 28px 18px 20px 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+            border: 1px solid #ececec;
+            min-height: 140px; /* Ensure all stat boxes have the same height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .stat-box:hover {
+            box-shadow: 0 8px 32px rgba(231,76,60,0.13);
+        }
+        .stat-box .stat-icon {
+            position: absolute;
+            top: -18px;
+            right: -18px;
+            font-size: 3.5rem;
+            color: #f5eaea;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .stat-box h4 {
+            margin-bottom: 7px;
+            font-size: 2.3rem;
+            color: #e74c3c;
+            font-weight: bold;
+            z-index: 1;
+            position: relative;
+            min-height: 2.7em; /* Ensures consistent height for all stat values, including longer train names */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-break: break-word;
+        }
+        .stat-box span {
+            color: #555;
+            font-size: 1.08rem;
+            z-index: 1;
+            position: relative;
+            font-weight: 500;
+        }
+        /* Different accent for each stat */
+        .stat-total-clients { border-top: 4px solid #e67e22; }
+        .stat-total-bookings { border-top: 4px solid #2980b9; }
+        .stat-popular-train { border-top: 4px solid #27ae60; }
+        .stat-popular-payment { border-top: 4px solid #8e44ad; }
+
+        /* Enhanced table styling for card-like rows */
+        #clientinfo-table-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        #clientinfo-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            max-width: 1200px;
+            background: #f4f5f7; /* Light gray background for the table */
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        #clientinfo-table thead th {
+            background-color: #f0f0f0;
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            padding: 14px 10px;
+            font-size: 1.08rem;
+            border: 1px solid #e0e0e0;
+        }
+        #clientinfo-table tbody tr {
+            background: #fff;
+            transition: background 0.2s;
+        }
+        #clientinfo-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        #clientinfo-table td {
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 1.05rem;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            background: transparent;
+        }
+        #clientinfo-table tbody tr td:first-child {
+            /* Remove border-radius for classic table look */
+            border-radius: 0;
+        }
+        #clientinfo-table tbody tr td:last-child {
+            border-radius: 0;
+        }
+        #clientinfo-table tbody tr:nth-child(even) {
+            background: #f7f7fa;
+        }
+        /* Responsive: stack table on small screens */
+        @media (max-width: 900px) {
+            #clientinfo-table, #clientinfo-table thead, #clientinfo-table tbody, #clientinfo-table th, #clientinfo-table td, #clientinfo-table tr {
+                display: block;
+            }
+            #clientinfo-table thead {
+                display: none;
+            }
+            #clientinfo-table tbody tr {
+                margin-bottom: 18px;
+            }
+            #clientinfo-table td {
+                text-align: left;
+                padding-left: 40%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            #clientinfo-table td:before {
+                position: absolute;
+                left: 16px;
+                top: 18px;
+                width: 35%;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #e74c3c;
+                content: attr(data-label);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
-<body>
+<body class="main-layout">
+    <div id="admin-password-overlay" style="position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;">
+        <div style="background:white;padding:40px 30px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.15);text-align:center;">
+            <h3>Admin Access</h3>
+            <input type="password" id="admin-password-input" placeholder="Enter password" style="padding:8px 12px;border-radius:5px;border:1px solid #ccc;">
+            <button id="admin-password-btn" style="margin-left:10px;padding:8px 16px;border-radius:5px;border:none;background:#e74c3c;color:white;">Enter</button>
+            <div id="admin-password-error" style="color:red;margin-top:10px;display:none;">Incorrect password</div>
+        </div>
+    </div>
+    <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+    </div>
+
     <header>
-        <h1>Train Admin Panel</h1>
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
-            <span style="font-size: 24px; font-weight: bold; color: #ff0000;">Flashway</span>
-            <a href="http://localhost:3001/base/index.html" style="text-decoration: none; background-color: #333; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold;">Go to Home</a>
+        <div class="header">
+            <img src="images/WhatsApp Image 2025-05-16 at 08.30.49_ba11a200.jpg" alt="logoimage"style="width: 81px;" class="imagelogo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                        <div class="full">
+                            <div class="center-desk">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarsExample04">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://localhost:3000/base/index.html">Home</a>  </li>
+                                    
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <h1> Admin Page</h1>
+    <div class="booking_ocline" id="booking-section">
+        <div class="container d-flex justify-content-center align-items-center" style="
+        padding-bottom: 23‒;">
+            <form id="searchTrainsForm" class="book_now w-50">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-3">
+                        <div class="titlepage">
+                            <h2>admin page</h2>
+                        </div>
 
-    <!-- Table to display client information -->
-    <table id="clientinfo-table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Carte de Crédit</th>
-                <th>Mois d'Expiration</th>
-                <th>Année d'Expiration</th>
-                <th>Méthode de Paiement</th>
-                <th>ID Train</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td colspan="7">Loading client information...</td>
-            </tr>
-        </tbody>
-    </table>
+                    </div>
 
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-stats" class="container my-4">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="stat-box stat-total-clients">
+                    <span class="stat-icon"><i class="fa fa-users"></i></span>
+                    <h4 id="stat-total-clients">0</h4>
+                    <span>Total Clients</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-total-bookings">
+                    <span class="stat-icon"><i class="fa fa-ticket"></i></span>
+                    <h4 id="stat-total-bookings">0</h4>
+                    <span>Total Bookings</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-popular-train">
+                    <span class="stat-icon"><i class="fa fa-train"></i></span>
+                    <h4 id="stat-popular-train">N/A</h4>
+                    <span>Most Popular Train</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-popular-payment">
+                    <span class="stat-icon"><i class="fa fa-credit-card"></i></span>
+                    <h4 id="stat-popular-payment">N/A</h4>
+                    <span>Most Used Payment</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="clientinfo-table-container">
+        <table id="clientinfo-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Carte de Crédit</th>
+                    <th>Mois d'Expiration</th>
+                    <th>Année d'Expiration</th>
+                    <th>Méthode de Paiement</th>
+                    <th>ID Train</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="7">Loading client information...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Contact US</h3>
+                        <ul class="conta">
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> flashway@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Menu Link</h3>
+                        <ul class="link_menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#booking-section">Book Now</a></li>
+                            <li><a href="#contact-us">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Newsletter</h3>
+                        <form class="bottom_form">
+                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                            <button class="sub_btn">Subscribe</button>
+                        </form>
+                        <ul class="social_icon">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script>
         async function fetchClientInfo() {
             try {
-                const response = await fetch('/api/clientinfos'); // Fetch client data from the server
+                const response = await fetch('/api/clientinfos');
                 const data = await response.json();
 
-                const tableBody = document.getElementById('clientinfo-table').querySelector('tbody');
-                tableBody.innerHTML = ''; // Clear existing rows
+                // --- STATISTICS ---
+                // Total clients
+                document.getElementById('stat-total-clients').textContent = data.length;
 
+                // Total bookings (assuming each client is a booking)
+                document.getElementById('stat-total-bookings').textContent = data.length;
+
+                // Most popular train
+                const trainCounts = {};
+                data.forEach(c => {
+                    trainCounts[c.trainId] = (trainCounts[c.trainId] || 0) + 1;
+                });
+                let popularTrainId = null;
+                let maxTrain = 0;
+                for (const [train, count] of Object.entries(trainCounts)) {
+                    if (count > maxTrain) {
+                        maxTrain = count;
+                        popularTrainId = train;
+                    }
+                }
+
+                // Show "N/A" by default
+                document.getElementById('stat-popular-train').textContent = 'N/A';
+
+                // Fetch train name for the most popular train ID
+                if (popularTrainId) {
+                    fetch(`/api/trains/${popularTrainId}`)
+                        .then(res => res.json())
+                        .then(train => {
+                            if (train && train.name) {
+                                document.getElementById('stat-popular-train').textContent = train.name;
+                            } else {
+                                document.getElementById('stat-popular-train').textContent = 'N/A';
+                            }
+                        })
+                        .catch(() => {
+                            document.getElementById('stat-popular-train').textContent = 'N/A';
+                        });
+                }
+
+                // Most used payment method
+                const paymentCounts = {};
+                data.forEach(c => {
+                    paymentCounts[c.paymentMethod] = (paymentCounts[c.paymentMethod] || 0) + 1;
+                });
+                let popularPayment = 'N/A';
+                let maxPayment = 0;
+                for (const [method, count] of Object.entries(paymentCounts)) {
+                    if (count > maxPayment) {
+                        maxPayment = count;
+                        popularPayment = method;
+                    }
+                }
+                document.getElementById('stat-popular-payment').textContent = popularPayment;
+
+                // --- TABLE ---
+                const tableBody = document.getElementById('clientinfo-table').querySelector('tbody');
+                tableBody.innerHTML = '';
                 if (data.length === 0) {
                     tableBody.innerHTML = '<tr><td colspan="7">No client information available</td></tr>';
                     return;
                 }
-
                 data.forEach(client => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${client.nom}</td>
-                        <td>${client.prenom}</td>
-                        <td>${client.creditCard}</td>
-                        <td>${client.expiryMonth}</td>
-                        <td>${client.expiryYear}</td>
-                        <td>${client.paymentMethod}</td>
-                        <td>${client.trainId}</td>
+                        <td data-label="Nom">${client.nom}</td>
+                        <td data-label="Prénom">${client.prenom}</td>
+                        <td data-label="Carte de Crédit">${client.creditCard}</td>
+                        <td data-label="Mois d'Expiration">${client.expiryMonth}</td>
+                        <td data-label="Année d'Expiration">${client.expiryYear}</td>
+                        <td data-label="Méthode de Paiement">${client.paymentMethod}</td>
+                        <td data-label="ID Train">${client.trainId}</td>
                     `;
                     tableBody.appendChild(row);
                 });
@@ -203,13 +401,39 @@
             }
         }
 
-        // Automatically redirect to localhost after 5 seconds
+        // Automatically redirect to localhost after 9 seconds
         setTimeout(() => {
-            window.location.href = 'http://localhost:3000';
-        }, 5000);
+            window.location.href = 'http://localhost:3000/base/train_admin.html';
+        }, 100000);
 
         // Fetch client info on page load
         window.onload = fetchClientInfo;
     </script>
+    <script>
+        document.body.classList.add('admin-blur');
+        const overlay = document.getElementById('admin-password-overlay');
+        const input = document.getElementById('admin-password-input');
+        const btn = document.getElementById('admin-password-btn');
+        const error = document.getElementById('admin-password-error');
+        const PASSWORD = 'admin123'; // Change this to your desired password
+
+        btn.onclick = function() {
+            if (input.value === PASSWORD) {
+                overlay.style.display = 'none';
+                document.body.classList.remove('admin-blur');
+            } else {
+                error.style.display = 'block';
+            }
+        };
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') btn.click();
+        });
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    
 </body>
 </html>

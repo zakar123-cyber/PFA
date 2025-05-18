@@ -3,113 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket</title>
-    <style>
-        /* General Body Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
+    <title>FLASHWAY TICKET</title>
 
-        .ticket-container {
-            width: 80%;
-            max-width: 900px;
-            margin: 120px auto 20px auto;
-            background-color: #333;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            color: white;
-        }
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 
-        .ticket-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #ff0000;
-            padding-bottom: 20px;
-        }
-
-        .ticket-header h1 {
-            font-size: 30px;
-            margin: 0;
-            color: #ff0000;
-        }
-
-        .ticket-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .ticket-details div {
-            background-color: #444;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .ticket-details div span {
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        .qr-code-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100%;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .qr-code img {
-            width: 150px;
-            height: 150px;
-        }
-    </style>
+    <link rel="icon" href="images/WhatsApp Image 2025-05-16 at 08.30.49_ba11a200.jpg" type="image/gif"  />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="css_gen/css_ticket.css">
 </head>
-<body>
-
-<header>
-    <div class="header-container">
-        <div class="logo"><span>FLASHWAY</span></div>
-    </div>
-</header>
-
-<div class="ticket-container">
-    <div class="ticket-header">
-        <h1>Train Ticket</h1>
-        <span style="font-size: 20px; color: #ff0000;">Flashway</span>
+<body class="main-layout">
+    <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#"/></div>
     </div>
 
-    <div class="ticket-details">
-        <div>
-            <span>Name:</span> <span>Ahmed</span>
+    <header>
+        <div class="header">
+            <img src="images/WhatsApp Image 2025-05-16 at 08.30.49_ba11a200.jpg" alt="logoimage"style="width: 81px;" class="imagelogo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                        
+                        <div class="full">
+                            <div class="center-desk">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarsExample04">
+                                <ul class="navbar-nav mr-auto">
+                                    
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <span>Prénom:</span> <span>Basha</span>
-        </div>
-        <div>
-            <span>Train ID:</span> <span>680a1a3a51b5ef162ff94b7a</span>
-        </div>
-        <div>
-            <span>Payment Method:</span> <span>Mastercard</span>
-        </div>
-        <div>
-            <span>Seat Number:</span> <span>S-37</span>
+    </header>
+
+    <div class="container mt-5">
+        <div class="ticket-container">
+            <div class="ticket-header-text">
+                
+                <span>FLASHWAY</span>
+            </div>
+
+            <div class="ticket-details">
+                <div>
+                    <span>Name:</span> <span id="name"></span>
+                </div>
+                <div>
+                    <span>Prénom:</span> <span id="prenom"></span>
+                </div>
+                <div>
+                    <span>Train ID:</span> <span id="trainId"></span>
+                </div>
+                <div>
+                    <span>Payment Method:</span> <span id="paymentMethod"></span>
+                </div>
+                <div>
+                    <span>Seat Number:</span> <span id="seatNumber"></span>
+                </div>
+                <div>
+                    <span>Train Name:</span> <span id="trainName"></span>
+                </div>
+                <div>
+                    <span>Station de départ:</span> <span id="departureStation"></span>
+                </div>
+                <div>
+                    <span>Station d'arrivée:</span> <span id="arrivalStation"></span>
+                </div>
+                <div>
+                    <span>Date de départ:</span> <span id="departureDate"></span>
+                </div>
+            </div>
+            <div class="qr-code-container">
+                <img src="" alt="QR Code" id="qrCode">
+                <p>Scan QR Code to view ticket on your phone</p>
+            </div>
+
+            
+
+            <div class="text-center mt-3">
+                <button id="gotoTestTicket" class="btn btn-primary">Voir Test Ticket</button>
+            </div>
+
         </div>
     </div>
 
-    <div class="qr-code-wrapper">
-        <p>Scan QR Code for more details</p>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://611f-105-72-174-113.ngrok-free.app/testticket?name=Ahmed&prenom=Basha&trainId=680a1a3a51b5ef162ff94b7a&paymentMethod=Mastercard&seatNumber=S-37" alt="QR Code">
-    </div>
-</div>
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Contact US</h3>
+                        <ul class="conta">
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> flashway@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Menu Link</h3>
+                        <ul class="link_menu">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#booking-section">Book Now</a></li>
+                            <li><a href="#contact-us">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Newsletter</h3>
+                        <form class="bottom_form">
+                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                            <button class="sub_btn">Subscribe</button>
+                        </form>
+                        <ul class="social_icon">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const queryParams = new URLSearchParams(window.location.search);
+            const nom = queryParams.get('nom');
+            const prenom = queryParams.get('prenom');
+            const trainId = queryParams.get('trainId');
+            const paymentMethod = queryParams.get('paymentMethod');
+            const seatNumber = queryParams.get('seatNumber');
+            const trainName = queryParams.get('trainName');
+            const departureStation = queryParams.get('departureStation');
+            const arrivalStation = queryParams.get('arrivalStation');
+            const departureDate = queryParams.get('departureDate');
+
+            // Populate the fields dynamically
+            document.getElementById('name').textContent = nom;
+            document.getElementById('prenom').textContent = prenom;
+            document.getElementById('trainId').textContent = trainId;
+            document.getElementById('paymentMethod').textContent = paymentMethod;
+            document.getElementById('seatNumber').textContent = seatNumber;
+            document.getElementById('trainName').textContent = trainName;
+            document.getElementById('departureStation').textContent = departureStation;
+            document.getElementById('arrivalStation').textContent = arrivalStation;
+            document.getElementById('departureDate').textContent = departureDate;
+
+            // Generate QR Code
+            const qrCodeContainer = document.querySelector('.qr-code-container');
+            if (qrCodeContainer) {
+                const qrCodeImage = qrCodeContainer.querySelector('img');
+                if (qrCodeImage) {
+                    const params = window.location.search;
+                    const baseUrl = ' https://05eb-105-154-0-15.ngrok-free.app/base/testticket.html'; // <-- Your ngrok URL
+                    const qrUrl = `${baseUrl}${params}`;
+                    const qrCodeApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrUrl)}`;
+                    qrCodeImage.src = qrCodeApiUrl;
+                    qrCodeImage.alt = 'QR Code for Test Ticket';
+                }
+            }
+
+            // Add this for the button
+            const gotoTestTicketBtn = document.getElementById('gotoTestTicket');
+            if (gotoTestTicketBtn) {
+                gotoTestTicketBtn.addEventListener('click', function() {
+                    const params = new URLSearchParams(window.location.search);
+                    window.location.href = `testticket.html?${params.toString()}`;
+                });
+            }
+        });
+        document.getElementById('purchaseButton').addEventListener('click', async function () {
+            const nom = document.getElementById('nom').value;
+            const prenom = document.getElementById('prenom').value;
+            const creditCard = document.getElementById('creditCard').value;
+            const expiryMonth = document.getElementById('expiryMonth').value;
+            const expiryYear = document.getElementById('expiryYear').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const trainId = this.getAttribute('data-train-id');
+        
+            try {
+                const response = await fetch('http://localhost:3000/api/saveClientInfo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nom, prenom, creditCard, expiryMonth, expiryYear, paymentMethod, trainId })
+                });
+        
+                const result = await response.json();
+                if (response.ok) {
+                    const queryParams = new URLSearchParams({
+                        nom,
+                        prenom,
+                        trainId,
+                        paymentMethod,
+                        seatNumber: result.seatNumber
+                    }).toString();
+                    window.location.href = `testticket.html?${queryParams}`;
+                } else {
+                    alert(result.message || 'Erreur lors du paiement.');
+                }
+        
+            } catch (error) {
+                console.error('Error saving client info:', error);
+                alert('Erreur lors de l’envoi des informations de paiement.');
+            }
+        });
+        document.getElementById('gotoTestTicket').addEventListener('click', function() {
+            const params = new URLSearchParams(window.location.search);
+            window.location.href = `testticket.html?${params.toString()}`;
+        });
+    </script>
 </body>
 </html>
